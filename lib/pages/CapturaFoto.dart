@@ -14,7 +14,7 @@ class CapturaFoto extends StatefulWidget {
 class _Captura extends State<CapturaFoto> {
   // funcao para enviar foto(backend nao feito ainda)
   enviarFoto() {}
-  late File arquivo;
+  File? arquivo;
   showPreview(file) async {
     file = await Get.to(() => PreviewPage(file: file));
     if (file != null) {
@@ -27,11 +27,15 @@ class _Captura extends State<CapturaFoto> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.colors.gray,
+      appBar: AppBar(
+        backgroundColor: AppTheme.colors.orange,
+        title: Text('Câmera'),
+      ),
       body: SafeArea(
           child: Center(
         child: Column(
           children: [
-            if (arquivo != null) AnexoFoto(arquivo: arquivo),
+            if (arquivo != null) AnexoFoto(arquivo: arquivo!),
             IconButton(
               onPressed: () => Get.to(
                 () => CameraCamera(onFile: (file) => showPreview(file)),

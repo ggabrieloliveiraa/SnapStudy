@@ -16,6 +16,10 @@ class CriarGrupo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.colors.gray,
+      appBar: AppBar(
+        backgroundColor: AppTheme.colors.orange,
+        title: Text('Criar grupo'),
+      ),
       body: SafeArea(
         child: Center(
           child: Column(

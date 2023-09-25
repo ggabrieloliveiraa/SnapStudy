@@ -6,6 +6,9 @@ import 'pages/Timer.dart';
 import 'pages/Timer2.dart';
 import 'pages/CapturaFoto.dart';
 import 'package:get/get.dart';
+import 'pages/Home.dart';
+import 'package:sprint2/componentes/bottom_bar.dart';
+import 'package:sprint2/componentes/NavigationBar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +16,14 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       //home: CriarGrupo(),
       //home: Timer2(),
-      home: CapturaFoto(),
+      home: NavigationBarApp(),
+      //home: CapturaFoto(),
     );
   }
 }
