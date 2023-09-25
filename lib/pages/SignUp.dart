@@ -1,31 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:sprint2/pages/SignUp.dart';
 import 'package:sprint2/app_theme.dart';
-import 'package:sprint2/pages/Home.dart';
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Snap Study',
-      home: Login(title: 'Snap Study'),
-    );
-  }
-}
-
-class Login extends StatefulWidget {
-  const Login({super.key, required this.title});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key, required this.title});
   final String title;
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   bool _passwordVisible = false;
 
   @override
@@ -34,9 +18,9 @@ class _LoginState extends State<Login> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.colors.orange,
+      backgroundColor: AppTheme.colors.gray,
       appBar: AppBar(
-        backgroundColor: AppTheme.colors.dark_gray,
+        backgroundColor: AppTheme.colors.white,
         toolbarHeight: 150,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -45,6 +29,7 @@ class _LoginState extends State<Login> {
               'images/icon.png',
               fit: BoxFit.contain,
               height: 32,
+              color: AppTheme.colors.orange,
             ),
           ],
         ),
@@ -60,17 +45,17 @@ class _LoginState extends State<Login> {
               height: 50,
             ),
             Text(
-              'Entrar',
+              'Inscreva-se',
               style: TextStyle(
                   fontSize: 35,
                   fontFamily: 'Nunito',
                   fontWeight: FontWeight.bold,
-                  color: AppTheme.colors.white),
+                  color: AppTheme.colors.dark_gray),
             ),
             SizedBox(height: 10),
             Text("Seja produtivo em comunidade!",
                 style: TextStyle(
-                    fontFamily: 'Nunito', color: AppTheme.colors.white)),
+                    fontFamily: 'Nunito', color: AppTheme.colors.dark_gray)),
             SizedBox(height: 30),
             Align(
               alignment: Alignment.centerLeft,
@@ -79,7 +64,7 @@ class _LoginState extends State<Login> {
                 child: Text(
                   "Usuário",
                   style: TextStyle(
-                    fontFamily: 'Nunito', color: AppTheme.colors.white, fontWeight: FontWeight.bold,
+                    fontFamily: 'Nunito', color: AppTheme.colors.dark_gray, fontWeight: FontWeight.bold,
                   ),
                 ),
               )
@@ -87,12 +72,12 @@ class _LoginState extends State<Login> {
             SizedBox(
               width: 480,
               child: TextField(
-                style: TextStyle(color: AppTheme.colors.white),
+                style: TextStyle(color: AppTheme.colors.dark_gray),
                 decoration: InputDecoration(
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: AppTheme.colors.white),
+                    borderSide: BorderSide(width: 1, color: AppTheme.colors.dark_gray),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   prefixIcon: Container(
@@ -104,7 +89,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   hintText: 'Digite seu nome de usuário...',
-                  hintStyle: TextStyle(color: AppTheme.colors.white, fontFamily: 'Nunito')
+                  hintStyle: TextStyle(color: AppTheme.colors.dark_gray, fontFamily: 'Nunito')
                 ),
               )
             ),
@@ -116,7 +101,7 @@ class _LoginState extends State<Login> {
                 child: Text(
                   "Senha",
                   style: TextStyle(
-                    fontFamily: 'Nunito', color: AppTheme.colors.white, fontWeight: FontWeight.bold
+                    fontFamily: 'Nunito', color: AppTheme.colors.dark_gray, fontWeight: FontWeight.bold
                   ),
                 ),
               )
@@ -125,12 +110,12 @@ class _LoginState extends State<Login> {
               width: 480,
               child: TextField(
                 obscureText: !_passwordVisible,
-                style: TextStyle(color: AppTheme.colors.white),
+                style: TextStyle(color: AppTheme.colors.dark_gray),
                 decoration: InputDecoration(
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: AppTheme.colors.white),
+                    borderSide: BorderSide(width: 1, color: AppTheme.colors.dark_gray),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   prefixIcon: Container(
@@ -149,7 +134,7 @@ class _LoginState extends State<Login> {
                     });
                   }),
                   hintText: 'Digite sua senha',
-                  hintStyle: TextStyle(color: AppTheme.colors.white, fontFamily: 'Nunito')
+                  hintStyle: TextStyle(color: AppTheme.colors.dark_gray, fontFamily: 'Nunito')
                 ),
               )
             ),
@@ -163,32 +148,16 @@ class _LoginState extends State<Login> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)
                   ),
-                  primary: AppTheme.colors.white,
+                  primary: AppTheme.colors.dark_gray,
                 ),
                 icon: Icon(Icons.arrow_forward, color: AppTheme.colors.orange),
-                label: Text('Entrar', style: TextStyle(fontFamily: 'Nunito',color: AppTheme.colors.orange, fontWeight: FontWeight.bold, fontSize: 20),),
-                onPressed: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home()),
-                  )
-                },
+                label: Text('Entrar', style: TextStyle(fontFamily: 'Nunito',color: AppTheme.colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
+                onPressed: () => {}, 
               )
             ),
             SizedBox(height: 50,),
-            Container(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUp(title: '',)),
-                  );
-                },
-              child: Text("Não possui uma conta? Inscreva-se", style: TextStyle(fontFamily: 'Nunito',color: AppTheme.colors.white),),
-              ),
-            ),
             SizedBox(height: 10,),
-            Text("Esqueceu sua senha?", style: TextStyle(fontFamily: 'Nunito',color: AppTheme.colors.green),)
+            Text("Já possui uma conta? Entre agora", style: TextStyle(fontFamily: 'Nunito',color: AppTheme.colors.dark_gray),)
           ],
         ),
       ),

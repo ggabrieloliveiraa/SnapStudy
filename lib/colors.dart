@@ -8,5 +8,7 @@ class AppColors {
   final pink = const Color(0xFFFFE4E7);
   final red = const Color(0xFFF43F5E);
   final gray = const Color(0xFFF5F5F5);
+  final green = const Color(0xFFD9F99D);
+
   const AppColors();
 }
