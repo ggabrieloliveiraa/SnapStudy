@@ -76,7 +76,7 @@ class _Home extends State<Home> {
           Row(
             children: [
               const SizedBox(height: 80),
-              SizedBox(width: 10),
+              SizedBox(width:90),
               IconButton(
                 icon: Icon(
                   color: AppTheme.colors.orange,

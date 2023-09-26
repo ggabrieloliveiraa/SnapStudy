@@ -26,7 +26,7 @@ class _SignUpState extends State<SignUp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'images/icon.png',
+              'lib/images/icon.png',
               fit: BoxFit.contain,
               height: 32,
               color: AppTheme.colors.orange,
@@ -83,7 +83,7 @@ class _SignUpState extends State<SignUp> {
                   prefixIcon: Container(
                     padding: EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'images/email.png',
+                      'lib/images/email.png',
                       height: 5,
                       width: 5,
                     ),
@@ -121,7 +121,7 @@ class _SignUpState extends State<SignUp> {
                   prefixIcon: Container(
                     padding: EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'images/password.png',
+                      'lib/images/password.png',
                       height: 5,
                       width: 5,
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sprint2/pages/SignUp.dart';
 import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/pages/Home.dart';
+import 'package:sprint2/componentes/NavigationBar.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -42,7 +43,7 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'images/icon.png',
+              'lib/images/icon.png',
               fit: BoxFit.contain,
               height: 32,
             ),
@@ -98,7 +99,7 @@ class _LoginState extends State<Login> {
                   prefixIcon: Container(
                     padding: EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'images/email.png',
+                      'lib/images/email.png',
                       height: 5,
                       width: 5,
                     ),
@@ -136,7 +137,7 @@ class _LoginState extends State<Login> {
                   prefixIcon: Container(
                     padding: EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'images/password.png',
+                      'lib/images/password.png',
                       height: 5,
                       width: 5,
                     ),
@@ -170,7 +171,7 @@ class _LoginState extends State<Login> {
                 onPressed: () => {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Home()),
+                    MaterialPageRoute(builder: (context) => NavigationBarApp()),
                   )
                 },
               )
