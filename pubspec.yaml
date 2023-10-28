@@ -42,6 +42,8 @@ dependencies:
   camera: ^0.10.5+4
   camera_camera: ^3.0.0
   get: ^4.6.6
+  supabase_flutter: ^1.10.23
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
