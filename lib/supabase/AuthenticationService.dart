@@ -1,7 +1,4 @@
-import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:supabase/supabase.dart';
-import 'package:sprint2/main.dart';
 import 'package:sprint2/supabase/SupabaseCredentials.dart';
 import 'package:flutter/material.dart';
 import 'package:sprint2/componentes/NavigationBar.dart';
@@ -39,6 +36,6 @@ class AuthenticationService {
   }
 
   Future<void> logout() async {
-    await supabase.auth.signOut();
+    await SupabaseCredentials.supabaseClient.auth.signOut();
   }
 }

@@ -5,6 +5,7 @@ import 'package:sprint2/pages/Home.dart';
 import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/pages/Perfil.dart';
 import 'package:sprint2/pages/Historico.dart';
+import 'package:sprint2/pages/Grupos.dart';
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});

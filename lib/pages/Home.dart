@@ -6,6 +6,7 @@ import 'package:sprint2/pages/CapturaFoto.dart';
 import 'package:sprint2/pages/CriarGrupo.dart';
 import 'package:sprint2/pages/Timer2.dart';
 import 'package:sprint2/pages/Home.dart';
+import 'package:sprint2/supabase/SupabaseCredentials.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -76,7 +77,7 @@ class _Home extends State<Home> {
           Row(
             children: [
               const SizedBox(height: 80),
-              SizedBox(width:90),
+              SizedBox(width: 90),
               IconButton(
                 icon: Icon(
                   color: AppTheme.colors.orange,

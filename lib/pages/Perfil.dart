@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/componentes/bottom_bar.dart';
+import 'package:sprint2/supabase/SupabaseCredentials.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
@@ -45,7 +46,7 @@ class _Perfil extends State<Perfil> {
               height: 30.0,
             ),
             Text(
-              'NomeNomeNome',
+              SupabaseCredentials.supabaseClient.auth.currentUser!.email!,
               style: TextStyle(
                   fontSize: 35,
                   fontFamily: 'Nunito',

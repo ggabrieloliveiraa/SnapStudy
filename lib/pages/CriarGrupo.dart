@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/componentes/entrada_texto.dart';
 import 'package:sprint2/componentes/botao.dart';
+import 'package:sprint2/supabase/GroupService.dart';
 
 class CriarGrupo extends StatelessWidget {
   CriarGrupo({super.key});
@@ -11,7 +12,14 @@ class CriarGrupo extends StatelessWidget {
   final descGrupo = TextEditingController();
 
   // metodo para criar novo grupo (nao funciona por enquanto)
-  void novoGrupo() {}
+  void novoGrupo() {
+    GroupService groupService = GroupService();
+    groupService.newGroup(
+      nome: nomeGrupo.text,
+      desc: descGrupo.text,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
