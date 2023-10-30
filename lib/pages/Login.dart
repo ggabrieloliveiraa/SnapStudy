@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sprint2/pages/SignUp.dart';
 import 'package:sprint2/app_theme.dart';
-import 'package:sprint2/pages/Home.dart';
-import 'package:sprint2/componentes/NavigationBar.dart';
 import 'package:sprint2/supabase/AuthenticationService.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:sprint2/main.dart';
-import 'package:sprint2/supabase/SupabaseCredentials.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key, required this.title});

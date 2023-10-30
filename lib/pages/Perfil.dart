@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sprint2/app_theme.dart';
-import 'package:sprint2/componentes/bottom_bar.dart';
 import 'package:sprint2/supabase/AuthenticationService.dart';
 import 'package:sprint2/supabase/SupabaseCredentials.dart';
 
