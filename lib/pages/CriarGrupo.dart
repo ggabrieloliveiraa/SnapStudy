@@ -14,6 +14,8 @@ class CriarGrupo extends StatelessWidget {
   // metodo para criar novo grupo (nao funciona por enquanto)
   void novoGrupo() {
     GroupService groupService = GroupService();
+    debugPrint('movieTitle: $nomeGrupo');
+    debugPrint('movieTitle: $descGrupo');
     groupService.newGroup(
       nome: nomeGrupo.text,
       desc: descGrupo.text,
