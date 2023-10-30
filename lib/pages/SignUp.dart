@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sprint2/app_theme.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:sprint2/main.dart';
-import 'package:provider/provider.dart';
 import 'package:sprint2/supabase/AuthenticationService.dart';
 
 class SignUp extends StatefulWidget {

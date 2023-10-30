@@ -1,5 +1,4 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:sprint2/main.dart';
 
 class SupabaseCredentials {
   static const String APIKEY =

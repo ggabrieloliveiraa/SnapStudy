@@ -1,6 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:sprint2/supabase/SupabaseCredentials.dart';
-import 'package:flutter/material.dart';
 
 class GroupService {
   Future<void> newGroup({
