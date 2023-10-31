@@ -12,7 +12,7 @@ class AuthenticationService {
         .signUp(email: email, password: password);
   }
 
-  Future<void> login({
+  Future<bool> login({
     required String email,
     required String password,
     required BuildContext context,
@@ -30,8 +30,10 @@ class AuthenticationService {
         context,
         MaterialPageRoute(builder: (context) => NavigationBarApp()),
       );
+      return true;
     } else {
       print("Login mal-sucedido");
+      return false;
     }
   }
 

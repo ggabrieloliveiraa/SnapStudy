@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/supabase/AuthenticationService.dart';
 import 'package:sprint2/supabase/SupabaseCredentials.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
@@ -9,16 +10,14 @@ class Perfil extends StatefulWidget {
   _Perfil createState() => _Perfil();
 }
 
-
-
-
 class _Perfil extends State<Perfil> {
   bool _passwordVisible = false;
-  void changePassowrd() async {
+  void changePassword() async {
     AuthenticationService authService = AuthenticationService();
     authService.changePassword(
         id: SupabaseCredentials.supabaseClient.auth.currentUser!.id,
         password: senhaController.text);
+    _savePassword(senhaController.text);
   }
   final senhaController = TextEditingController();
   @override
@@ -131,10 +130,16 @@ class _Perfil extends State<Perfil> {
                         fontSize: 20),
                   ),
                   onPressed: () => {
-                    changePassowrd(),
+                    changePassword(),
                   },
                 )),
           ],
         ));
   }
+}
+
+_savePassword(password) async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  await pref.setString('password', password);
+  print("salvo" + (pref.getString('email') ?? "") + (pref.getString('password') ?? ""));
 }

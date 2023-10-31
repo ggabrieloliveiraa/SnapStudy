@@ -44,6 +44,7 @@ dependencies:
   get: ^4.6.6
   supabase_flutter: ^1.10.23
   provider: ^6.0.5
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

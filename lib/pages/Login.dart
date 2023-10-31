@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sprint2/pages/SignUp.dart';
 import 'package:sprint2/app_theme.dart';
+import 'package:sprint2/pages/Home.dart';
+import 'package:sprint2/componentes/NavigationBar.dart';
 import 'package:sprint2/supabase/AuthenticationService.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:sprint2/main.dart';
+import 'package:sprint2/supabase/SupabaseCredentials.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key, required this.title});
@@ -13,22 +19,36 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _passwordVisible = false;
+  bool hasPreferences = false;
+
   // controladores do campo de texto
-  final emailController = TextEditingController();
-  final senhaController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
 
   // metodo para fazer login
   void login() async {
     AuthenticationService authService = AuthenticationService();
-    authService.login(
+    bool hasPreferences = await authService.login(
         email: emailController.text,
         password: senhaController.text,
         context: context);
+        _saveLogin(emailController.text, senhaController.text);
   }
 
   @override
   void initState() {
     _passwordVisible = false;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _readLogin();
+    });
+  }
+  Future<void> _readLogin() async {
+    final _pref = await SharedPreferences.getInstance();
+    setState(() {
+      emailController.text = _pref.getString('email')!;
+      senhaController.text = _pref.getString('password')!;
+    });
+  
   }
 
   Widget build(BuildContext context) {
@@ -223,4 +243,10 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+_saveLogin(email, password) async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  await pref.setString('email', email);
+  await pref.setString('password', password);
+  print("salvo" + (pref.getString('email') ?? "") + (pref.getString('password') ?? ""));
 }

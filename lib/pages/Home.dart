@@ -3,6 +3,7 @@ import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/pages/Grupo.dart';
 import 'package:sprint2/supabase/SupabaseCredentials.dart';
 import 'package:sprint2/componentes/card_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
