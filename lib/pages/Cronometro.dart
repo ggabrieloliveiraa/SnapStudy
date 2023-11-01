@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/componentes/botao.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:sprint2/supabase/SupabaseCredentials.dart';
+import 'package:sprint2/supabase/TimeService.dart';
 
 class Cronometro extends StatefulWidget {
   @override

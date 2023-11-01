@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sprint2/app_theme.dart';
 import 'package:neon_circular_timer/neon_circular_timer.dart';
+import 'package:sprint2/supabase/SupabaseCredentials.dart';
+import 'package:sprint2/supabase/TimeService.dart';
 
 class Timer2 extends StatefulWidget {
   @override
@@ -9,8 +11,15 @@ class Timer2 extends StatefulWidget {
 
 class _TimerState extends State<Timer2> {
   @override
+  final CountDownController controller = new CountDownController();
+  void saveTime() async {
+    TimeService timeService = TimeService();
+    await timeService.newTime(
+        userId: SupabaseCredentials.supabaseClient.auth.currentUser!.id,
+        minutes: controller.getTime());
+  }
+
   Widget build(BuildContext context) {
-    final CountDownController controller = new CountDownController();
     return Scaffold(
         backgroundColor: AppTheme.colors.gray,
         appBar: AppBar(
@@ -73,6 +82,7 @@ class _TimerState extends State<Timer2> {
                           ),
                           onPressed: () {
                             controller.restart();
+                            saveTime();
                           }),
                     ]),
               ),
