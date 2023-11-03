@@ -16,7 +16,7 @@ class _TimerState extends State<Timer2> {
     TimeService timeService = TimeService();
     await timeService.newTime(
         userId: SupabaseCredentials.supabaseClient.auth.currentUser!.id,
-        minutes: controller.getTime());
+        minutes: (controller.getTimeInSeconds() / 60).round());
   }
 
   Widget build(BuildContext context) {
@@ -81,8 +81,8 @@ class _TimerState extends State<Timer2> {
                             Icons.repeat,
                           ),
                           onPressed: () {
-                            controller.restart();
                             saveTime();
+                            controller.restart();
                           }),
                     ]),
               ),

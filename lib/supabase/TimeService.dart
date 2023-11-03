@@ -4,10 +4,10 @@ import 'package:sprint2/supabase/SupabaseCredentials.dart';
 class TimeService {
   Future<void> newTime({
     required String userId,
-    required String minutes,
+    required int minutes,
   }) async {
     AuthResponse response = await SupabaseCredentials.supabaseClient
         .from('Tempo')
-        .insert({'UserId': userId, 'minutos': minutes});
+        .insert({'userId': userId, 'minutos': minutes});
   }
-}     
+}
