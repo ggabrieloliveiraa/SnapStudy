@@ -10,4 +10,10 @@ class TimeService {
         .from('Tempo')
         .insert({'userId': userId, 'minutos': minutes});
   }
+  Future<List<dynamic>> getTimes({
+    required String userId,
+  }) async {
+    final response = await SupabaseCredentials.supabaseClient.from('Tempo').select('minutos, created_at').eq("userId", userId);
+    return response;
+  }
 }
