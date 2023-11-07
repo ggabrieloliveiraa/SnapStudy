@@ -6,9 +6,23 @@ class TimeService {
     required String userId,
     required int minutes,
   }) async {
-    AuthResponse response = await SupabaseCredentials.supabaseClient
+    List<dynamic> check = await SupabaseCredentials.supabaseClient
         .from('Tempo')
-        .insert({'userId': userId, 'minutos': minutes});
+        .select('id, minutos, dia').eq("userId", userId).eq("dia", DateTime.now().toIso8601String());
+
+    print(check);
+    if(check.isNotEmpty){
+      await SupabaseCredentials.supabaseClient
+          .from('Tempo')
+          .update({'minutos': minutes + check[0]['minutos']})
+          .eq('id', check[0]['id']);
+      print(minutes + check[0]['minutos']);
+      print(check[0]['id']);
+    }else {
+      await SupabaseCredentials.supabaseClient
+          .from('Tempo')
+          .insert({'userId': userId,'minutos': minutes, 'dia': DateTime.now().toIso8601String()});
+    }
   }
   Future<List<dynamic>> getTimes({
     required String userId,
