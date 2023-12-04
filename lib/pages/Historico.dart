@@ -14,12 +14,17 @@ class Historico extends StatefulWidget {
 class _Historico extends State<Historico> {
   Future<List<dynamic>> getTime() async {
     TimeService timeService = TimeService();
+    DateTime dt = DateTime.now();
     List<dynamic> res = await timeService.getTimes(
         userId: SupabaseCredentials.supabaseClient.auth.currentUser!.id);
+    res.where((time) => time['dia'].contains("${dt.year}-${dt.month}"));
+    print(res);
     return res;
   }
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    int lastday = DateTime(now.year, now.month + 1, 0).day;
     return Scaffold(
       backgroundColor: AppTheme.colors.gray,
       appBar: AppBar(
@@ -41,7 +46,7 @@ class _Historico extends State<Historico> {
             return GridView.count(
               crossAxisCount: 4,
               children: List.generate(
-                time.length,
+                3,
                 (index) {
                   return Center(
                     child: Column(
