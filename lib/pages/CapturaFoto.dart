@@ -9,6 +9,7 @@ import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/componentes/botao.dart';
 import 'package:sprint2/pages/preview_page.dart';
 import 'package:sprint2/widgets/AnexoFoto.dart';
+import 'package:sprint2/supabase/ImagesService.dart';
 
 class CapturaFoto extends StatefulWidget {
   @override
@@ -20,15 +21,16 @@ class _Captura extends State<CapturaFoto> {
   final picker = ImagePicker();
 
   Future getFileFromGallery() async {
-  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-  if (pickedFile != null) {
-    setState(() {
-      arquivo = File(pickedFile.path);
-    });
+    if (pickedFile != null) {
+      setState(() {
+        arquivo = File(pickedFile.path);
+        ImagesService imagesService = ImagesService();
+        imagesService.uploadImage(arquivo);
+      });
+    }
   }
-}
-
 
   void enviarFoto() {
     // Lógica para enviar a foto para o backend (ainda não implementada)
@@ -75,7 +77,6 @@ class _Captura extends State<CapturaFoto> {
                   label: Text('Selecione um arquivo'),
                   onPressed: () => getFileFromGallery(),
                 ),
-
               ],
             ),
           ],
