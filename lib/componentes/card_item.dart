@@ -48,14 +48,18 @@ class CardItem extends StatelessWidget {
   final String title;
   final String description;
 
-  const CardItem(
-      {super.key,
-      required this.imageAsset,
-      required this.title,
-      required this.description});
+  const CardItem({
+    super.key,
+    required this.imageAsset,
+    required this.title,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Determina se o caminho da imagem é uma URL ou um ativo local
+    final isNetworkImage = Uri.tryParse(imageAsset)?.hasAbsolutePath ?? false;
+
     return Card(
         child: Padding(
       padding: const EdgeInsets.all(16.0),
@@ -63,12 +67,14 @@ class CardItem extends StatelessWidget {
         children: <Widget>[
           // Imagem
           ClipRRect(
-            borderRadius:
-                BorderRadius.circular(10.0), // Adjust the radius as needed
+            borderRadius: BorderRadius.circular(
+                10.0), // Ajuste o raio conforme necessário
             child: Container(
-              width: 100.0, // Adjust the width for your image size
-              height: 100.0, // Square dimensions
-              child: Image.asset(imageAsset, fit: BoxFit.cover),
+              width: 100.0, // Ajuste a largura conforme o tamanho da sua imagem
+              height: 100.0, // Dimensões quadradas
+              child: isNetworkImage
+                  ? Image.network(imageAsset, fit: BoxFit.cover)
+                  : Image.asset(imageAsset, fit: BoxFit.cover),
             ),
           ),
           // Texto
