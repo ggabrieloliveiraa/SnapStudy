@@ -40,6 +40,7 @@ class _Home extends State<Home> {
                     MaterialPageRoute(
                         builder: (context) => Grupo(
                             nomeGrupo: grupos[index]['Nome'] ?? "Sem nome",
+                            idGrupo: grupos[index]['id'] ?? 0,
                             descGrupo:
                                 grupos[index]['Desc'] ?? "Sem descricao")),
                   );

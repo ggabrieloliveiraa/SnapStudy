@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sprint2/pages/SignUp.dart';
 import 'package:sprint2/app_theme.dart';
-import 'package:sprint2/pages/Home.dart';
+import 'package:sprint2/pages/Grupo.dart';
 import 'package:sprint2/componentes/NavigationBar.dart';
 import 'package:sprint2/pages/Login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

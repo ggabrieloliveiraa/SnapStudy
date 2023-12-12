@@ -3,18 +3,49 @@ import 'package:sprint2/app_theme.dart';
 import 'package:sprint2/pages/CapturaFoto.dart';
 import 'package:sprint2/pages/Timer2.dart';
 import 'package:sprint2/componentes/card_item.dart';
+import 'package:sprint2/componentes/botao.dart';
+import 'package:sprint2/supabase/GroupService.dart';
+import 'package:sprint2/supabase/SupabaseCredentials.dart';
 
 class Grupo extends StatefulWidget {
   final String nomeGrupo;
   final String descGrupo;
+  final int idGrupo;
 
-  const Grupo({Key? key, required this.nomeGrupo, required this.descGrupo})
-      : super(key: key);
+  const Grupo({
+    Key? key,
+    required this.nomeGrupo,
+    required this.idGrupo,
+    required this.descGrupo,
+  }) : super(key: key);
 
+  @override
   _Grupo createState() => _Grupo();
 }
 
 class _Grupo extends State<Grupo> {
+  late final Stream<List<Map<String, dynamic>>> _membroStream;
+
+  String getEmail() {
+    String email = "aaaaaaaaa";
+    return email;
+  }
+
+  @override
+  void initState() {
+    print(widget.idGrupo);
+    super.initState();
+    _membroStream = SupabaseCredentials.supabaseClient
+        .from('membrosgrupo')
+        .stream(primaryKey: ['id']).eq(
+            'idgrupo', widget.idGrupo); // Usa o valor de idGrupo do widget
+  }
+
+  void entrarGrupo() {
+    GroupService groupService = GroupService();
+    groupService.entrarNoGrupo(idGrupo: widget.idGrupo);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,93 +54,114 @@ class _Grupo extends State<Grupo> {
         backgroundColor: AppTheme.colors.white,
         toolbarHeight: 150,
         title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 55.0, // Set the desired height in pixels.
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        widget.nomeGrupo,
-                        style: TextStyle(
-                            fontSize: 35,
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.colors.dark_gray),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 55.0, // Set the desired height in pixels.
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.nomeGrupo,
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontFamily: 'Nunito',
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.colors.dark_gray,
                       ),
-                      Text(
-                        'Alterar',
+                    ),
+                    InkWell(
+                      onTap: () {
+                        entrarGrupo();
+                        // Coloque aqui a ação que você quer realizar
+                      },
+                      child: Text(
+                        "Clique aqui",
                         style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.w400,
-                            color: AppTheme.colors.dark_gray),
-                      )
-                    ],
-                  ),
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  widget.descGrupo,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.colors.dark_gray),
-                )
-              ],
-            )),
+              ),
+              Text(
+                widget.descGrupo,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Nunito',
+                  fontWeight: FontWeight.w400,
+                  color: AppTheme.colors.dark_gray,
+                ),
+              ),
+            ],
+          ),
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(50)),
         ),
       ),
-      //bottomNavigationBar: BottomBar(),
-      body: Column(
-        children: <Widget>[
-          SizedBox(height: 30.0), // Add a 30-pixel space here
-          Expanded(
-            child: CardList(),
-          ),
-          Row(
-            children: [
-              const SizedBox(height: 80),
-              SizedBox(width: 90),
-              IconButton(
-                icon: Icon(
-                  color: AppTheme.colors.orange,
-                  Icons.photo_camera_rounded,
-                  size: 50,
-                ),
-                onPressed: () {
-                  // Navegar para a página 2 quando o botão for pressionado
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CapturaFoto()),
-                  );
-                },
+      body: StreamBuilder<List<Map<String, dynamic>>>(
+        stream: _membroStream,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final grupos = snapshot.data!;
+          return ListView.builder(
+            itemCount: grupos.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  CardItem(
+                    title: grupos[index]['idusuario'] ?? "Sem nome",
+                    description: grupos[index]['Desc'] ?? "TEMPO",
+                    imageAsset: "lib/images/cat.png",
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            const SizedBox(width: 90),
+            IconButton(
+              icon: Icon(
+                Icons.photo_camera_rounded,
+                size: 50,
+                color: AppTheme.colors.orange,
               ),
-              SizedBox(width: 220), // Espaçamento entre os botões
-              IconButton(
-                icon: Icon(
-                  color: AppTheme.colors.orange,
-                  Icons.timer,
-                  size: 50,
-                ),
-                onPressed: () {
-                  // Navegar para a página 3 quando o botão for pressionado
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Timer2()),
-                  );
-                },
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CapturaFoto()),
+                );
+              },
+            ),
+            const SizedBox(width: 220), // Espaçamento entre os botões
+            IconButton(
+              icon: Icon(
+                Icons.timer,
+                size: 50,
+                color: AppTheme.colors.orange,
               ),
-            ],
-          )
-        ],
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Timer2()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

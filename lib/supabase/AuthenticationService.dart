@@ -25,7 +25,8 @@ class AuthenticationService {
     final Session? session = res.session;
     final User? user = res.user;
     if (res.session != null) {
-      print("Login bem-sucedido para o usuário: ${res.user!.email}, ${SupabaseCredentials.supabaseClient.auth.currentUser!.id!}");
+      print(
+          "Login bem-sucedido para o usuário: ${res.user!.email}, ${SupabaseCredentials.supabaseClient.auth.currentUser!.id!}");
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => NavigationBarApp()),
@@ -41,11 +42,10 @@ class AuthenticationService {
     required String id,
     required String password,
   }) async {
-    final UserResponse res = await SupabaseCredentials.supabaseClient.auth.updateUser(
-      UserAttributes(
-        password: password,
-      )
-    );
+    final UserResponse res =
+        await SupabaseCredentials.supabaseClient.auth.updateUser(UserAttributes(
+      password: password,
+    ));
     if (res != null) {
       print(res);
     } else {
