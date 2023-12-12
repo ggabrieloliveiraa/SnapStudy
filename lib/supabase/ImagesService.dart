@@ -1,14 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:sprint2/supabase/SupabaseCredentials.dart';
 
 class ImagesService {
-  final String
-      userId; // Adicione o ID do usuário como uma propriedade da classe
-
-  ImagesService(
-      this.userId); // Modifique o construtor para aceitar o ID do usuário
-
   Future<void> uploadImage(File image) async {
     final storage = Supabase.instance.client.storage;
     final bucket = storage.from('images');
@@ -23,7 +18,7 @@ class ImagesService {
 
     // Inserir registro na tabela de imagens
     final response = await Supabase.instance.client.from('images').insert({
-      'user_id': userId,
+      'user_id': SupabaseCredentials.supabaseClient.auth.currentUser!.id,
       'image_url': imageUrl,
       'uploaded_at': DateTime.now().toIso8601String() // Data e hora do upload
     });
