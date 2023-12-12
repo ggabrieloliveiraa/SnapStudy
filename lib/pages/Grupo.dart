@@ -84,10 +84,9 @@ class _Grupo extends State<Grupo> {
                           // Coloque aqui a ação que você quer realizar
                         },
                         child: Text(
-                          "Clique aqui",
+                          "Entrar no grupo",
                           style: TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline,
+                            color: AppTheme.colors.orange,
                           ),
                         ),
                       ),
