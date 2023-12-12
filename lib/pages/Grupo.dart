@@ -129,7 +129,10 @@ class _Grupo extends State<Grupo> {
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: SizedBox(
+        height: 100,
+        child: BottomAppBar(
+        
         child: Row(
           children: [
             const SizedBox(width: 90),
@@ -146,7 +149,7 @@ class _Grupo extends State<Grupo> {
                 );
               },
             ),
-            const SizedBox(width: 220), // Espaçamento entre os botões
+            const SizedBox(width: 100), // Espaçamento entre os botões
             IconButton(
               icon: Icon(
                 Icons.timer,
@@ -162,7 +165,7 @@ class _Grupo extends State<Grupo> {
             ),
           ],
         ),
-      ),
+      ),)
     );
   }
 }

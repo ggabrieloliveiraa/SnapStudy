@@ -30,7 +30,11 @@ class CriarGrupo extends StatelessWidget {
         backgroundColor: AppTheme.colors.orange,
         title: Text('Criar grupo'),
       ),
-      body: SafeArea(
+      body: Padding(
+        // Add padding to the entire body
+        padding: EdgeInsets.all(19.0),
+        child:
+      SafeArea(
         child: Center(
           child: Column(
             children: [
@@ -39,7 +43,7 @@ class CriarGrupo extends StatelessWidget {
                 'Crie agora a sua comunidade!',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 30,
+                  fontSize: 24,
                   fontFamily: 'Nunito',
                   fontWeight: FontWeight.bold,
                 ),
@@ -79,6 +83,6 @@ class CriarGrupo extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sprint2/app_theme.dart';
+import 'package:sprint2/pages/Login.dart';
 import 'package:sprint2/supabase/AuthenticationService.dart';
 
 class SignUp extends StatefulWidget {
@@ -49,7 +50,11 @@ class _SignUpState extends State<SignUp> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(50)),
         ),
       ),
-      body: Center(
+      body:  Padding(
+        // Add padding to the entire body
+        padding: EdgeInsets.all(19.0),
+        child:
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -178,7 +183,7 @@ class _SignUpState extends State<SignUp> {
                   icon:
                       Icon(Icons.arrow_forward, color: AppTheme.colors.orange),
                   label: Text(
-                    'Entrar',
+                    'Criar conta',
                     style: TextStyle(
                         fontFamily: 'Nunito',
                         color: AppTheme.colors.white,
@@ -187,6 +192,13 @@ class _SignUpState extends State<SignUp> {
                   ),
                   onPressed: () => {
                     novoUsuario(),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Login(
+                              title: '',
+                            )),
+                  )
                   },
                 )),
             SizedBox(
@@ -195,14 +207,32 @@ class _SignUpState extends State<SignUp> {
             SizedBox(
               height: 10,
             ),
-            Text(
-              "Já possui uma conta? Entre agora",
-              style: TextStyle(
-                  fontFamily: 'Nunito', color: AppTheme.colors.dark_gray),
-            )
+            Container(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Login(
+                              title: '',
+                            )),
+                  );
+                },
+                child: Text(
+                  "Já possui uma conta? Entre agora",
+                  style: TextStyle(
+                      fontFamily: 'Nunito', color: AppTheme.colors.dark_gray),
+                ),
+              ),
+            ),
+            // Text(
+            //   "Já possui uma conta? Entre agora",
+            //   style: TextStyle(
+            //       fontFamily: 'Nunito', color: AppTheme.colors.dark_gray),
+            // )
           ],
         ),
       ),
-    );
+    ));
   }
 }

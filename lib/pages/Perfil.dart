@@ -34,7 +34,11 @@ class _Perfil extends State<Perfil> {
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
           ),
         ),
-        body: Column(
+        body: Padding(
+        // Add padding to the entire body
+        padding: EdgeInsets.all(19.0),
+        child:
+        Column(
           children: [
             const SizedBox(
               height: 30.0,
@@ -103,11 +107,14 @@ class _Perfil extends State<Perfil> {
                               _passwordVisible = !_passwordVisible;
                             });
                           }),
-                      hintText: 'Digite sua senha',
+                      hintText: 'Digite sua nova senha',
                       hintStyle: TextStyle(
                           color: AppTheme.colors.dark_gray,
                           fontFamily: 'Nunito')),
                 )),
+                const SizedBox(
+              height: 30.0,
+            ),
               SizedBox(
                 width: 480,
                 height: 60,
@@ -122,7 +129,7 @@ class _Perfil extends State<Perfil> {
                   icon:
                       Icon(Icons.arrow_forward, color: AppTheme.colors.orange),
                   label: Text(
-                    'Entrar',
+                    'Mudar senha',
                     style: TextStyle(
                         fontFamily: 'Nunito',
                         color: AppTheme.colors.white,
@@ -134,7 +141,8 @@ class _Perfil extends State<Perfil> {
                   },
                 )),
           ],
-        ));
+        ),
+    ));
   }
 }
 

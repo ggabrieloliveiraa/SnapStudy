@@ -71,7 +71,11 @@ class _LoginState extends State<Login> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(50)),
         ),
       ),
-      body: Center(
+      body: Padding(
+        // Add padding to the entire body
+        padding: EdgeInsets.all(19.0),
+        child:
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -241,7 +245,7 @@ class _LoginState extends State<Login> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
 _saveLogin(email, password) async {
