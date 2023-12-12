@@ -1,9 +1,25 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:sprint2/supabase/SupabaseCredentials.dart';
 
 class ImagesService {
+  Future<String?> fetchLatestImageByUserId(String userId) async {
+    final response = await Supabase.instance.client
+        .from('images')
+        .select('image_url')
+        .eq('user_id', userId)
+        .order('uploaded_at', ascending: false)
+        .limit(1)
+        .single();
+    if (response.error != null) {
+      print('Erro ao buscar a imagem: ${response.error.message}');
+      return null;
+    }
+    return response.data['image_url'] as String?;
+  }
+
   Future<void> uploadImage(File image) async {
     final storage = Supabase.instance.client.storage;
     final bucket = storage.from('images');

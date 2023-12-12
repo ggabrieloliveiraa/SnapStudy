@@ -6,6 +6,7 @@ import 'package:sprint2/componentes/card_item.dart';
 import 'package:sprint2/componentes/botao.dart';
 import 'package:sprint2/supabase/GroupService.dart';
 import 'package:sprint2/supabase/SupabaseCredentials.dart';
+import 'package:sprint2/supabase/ImagesService.dart';
 
 class Grupo extends StatefulWidget {
   final String nomeGrupo;
@@ -24,6 +25,7 @@ class Grupo extends StatefulWidget {
 }
 
 class _Grupo extends State<Grupo> {
+  final ImagesService imageService = ImagesService();
   late final Stream<List<Map<String, dynamic>>> _membroStream;
 
   String getEmail() {
@@ -116,14 +118,19 @@ class _Grupo extends State<Grupo> {
           return ListView.builder(
             itemCount: grupos.length,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  CardItem(
+              return FutureBuilder<String?>(
+                future: imageService.fetchLatestImageByUserId(
+                    grupos[index]['idusuario'].toString()),
+                builder: (context, imageSnapshot) {
+                  String imageAsset =
+                      imageSnapshot.data ?? "lib/images/cat.png";
+
+                  return CardItem(
                     title: grupos[index]['idusuario'] ?? "Sem nome",
                     description: grupos[index]['Desc'] ?? "TEMPO",
-                    imageAsset: "lib/images/cat.png",
-                  ),
-                ],
+                    imageAsset: imageAsset,
+                  );
+                },
               );
             },
           );
